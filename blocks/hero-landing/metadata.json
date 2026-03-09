@@ -1,0 +1,38 @@
+{
+  "variantName": "hero-landing",
+  "baseBlock": "hero",
+  "version": "1.0.0",
+  "created": "2026-03-09T13:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.pearson.com/en-gb/schools/secondary/parents-learners.html",
+    "originPage": "Secondary parents and learners landing page",
+    "blockPosition": "top"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "landing-hero",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "heading + subtitle + paragraph + CTA + image",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "landing pages with prominent hero banners",
+      "pages with dark background hero sections",
+      "marketing pages with image-based heroes"
+    ],
+    "notSuitableFor": [
+      "minimal text-only hero sections",
+      "blog post headers without images"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en-gb/schools/secondary/parents-learners"],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-09T13:18:00.000Z"
+  }
+}

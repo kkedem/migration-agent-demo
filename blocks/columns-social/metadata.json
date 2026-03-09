@@ -1,0 +1,38 @@
+{
+  "variantName": "columns-social",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-03-09T13:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.pearson.com/en-gb/schools/secondary/parents-learners.html",
+    "originPage": "Secondary parents and learners landing page",
+    "blockPosition": "bottom"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "compact",
+    "purpose": "social-links",
+    "imagePattern": "noimg"
+  },
+  "contentPattern": {
+    "structure": "heading + links",
+    "buttonCount": 0,
+    "imageCount": 0
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "social media link sections",
+      "contact information columns",
+      "simple text-only two-column layouts"
+    ],
+    "notSuitableFor": [
+      "image-heavy column layouts",
+      "promotional content sections"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en-gb/schools/secondary/parents-learners"],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-09T13:18:00.000Z"
+  }
+}

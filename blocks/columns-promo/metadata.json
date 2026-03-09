@@ -1,0 +1,38 @@
+{
+  "variantName": "columns-promo",
+  "baseBlock": "columns",
+  "version": "1.0.0",
+  "created": "2026-03-09T13:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.pearson.com/en-gb/schools/secondary/parents-learners.html",
+    "originPage": "Secondary parents and learners landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "dark",
+    "density": "spacious",
+    "purpose": "promotional",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + subtitle + paragraph + CTA",
+    "buttonCount": 1,
+    "imageCount": 1
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "promotional content with large background images",
+      "product or service highlight sections",
+      "marketing content with image and text side-by-side"
+    ],
+    "notSuitableFor": [
+      "simple text-only two-column layouts",
+      "data comparison layouts"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en-gb/schools/secondary/parents-learners"],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-09T13:18:00.000Z"
+  }
+}

@@ -1,0 +1,21 @@
+{
+  "status": "success",
+  "url": "https://www.pearson.com/en-gb/schools/secondary/parents-learners.html",
+  "path": "en-gb/schools/secondary/parents-learners",
+  "timestamp": "2026-03-09T13:42:40.705Z",
+  "title": "Secondary students and parents | Pearson UK",
+  "template": "parents-learners-page",
+  "blocks": [
+    "cards-linked",
+    "cards-linked",
+    "cards-linked",
+    "columns-promo",
+    "cards-topic",
+    "cards-topic",
+    "cards-topic",
+    "cards-topic",
+    "columns-info",
+    "columns-social",
+    "columns-social"
+  ]
+}

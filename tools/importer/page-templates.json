@@ -1,0 +1,128 @@
+{
+  "templates": [
+    {
+      "name": "parents-learners-page",
+      "urls": [
+        "https://www.pearson.com/en-gb/schools/secondary/parents-learners.html"
+      ],
+      "description": "Secondary schools parents and learners landing page with informational content sections",
+      "blocks": [
+        {
+          "name": "hero-landing",
+          "instances": [
+            "main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type"
+          ]
+        },
+        {
+          "name": "cards-linked",
+          "instances": [
+            "main section.column-control.bgcolor--ui-01 .content-tile.content-tile-panel-item"
+          ]
+        },
+        {
+          "name": "columns-promo",
+          "instances": [
+            "main .content-tile.c-promo-gradient-dark-text-left"
+          ]
+        },
+        {
+          "name": "cards-topic",
+          "instances": [
+            "main section.column-control.flex-layout--pin-cta .content-tile.content-tile-panel-item"
+          ]
+        },
+        {
+          "name": "columns-info",
+          "instances": [
+            "main .content-tile.content-tile-color-block--full-img--text-right"
+          ]
+        },
+        {
+          "name": "columns-social",
+          "instances": [
+            "main .content-tile.content-tile-panel-item-main.text-primary-link"
+          ]
+        }
+      ],
+      "sections": [
+        {
+          "id": "section-1",
+          "name": "Hero",
+          "selector": "main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type",
+          "style": null,
+          "blocks": [
+            "hero-landing"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-2",
+          "name": "Qualification Cards",
+          "selector": "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(1)",
+          "style": "grey",
+          "blocks": [
+            "cards-linked"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-3",
+          "name": "Information and Revise Promo",
+          "selector": "main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(2)",
+          "style": null,
+          "blocks": [
+            "columns-promo"
+          ],
+          "defaultContent": [
+            ".content-tile.promocard--light-theme"
+          ]
+        },
+        {
+          "id": "section-4",
+          "name": "Careers Hub",
+          "selector": "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(2)",
+          "style": "grey",
+          "blocks": [],
+          "defaultContent": [
+            ".content-tile.text-primary-link"
+          ]
+        },
+        {
+          "id": "section-5",
+          "name": "Topic Cards",
+          "selector": "main #main-content-starts section.column-control.flex-layout--pin-cta",
+          "style": null,
+          "blocks": [
+            "cards-topic"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-6",
+          "name": "Wellbeing",
+          "selector": "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(3)",
+          "style": "grey",
+          "blocks": [
+            "columns-info"
+          ],
+          "defaultContent": []
+        },
+        {
+          "id": "section-7",
+          "name": "Get in Touch",
+          "selector": [
+            "main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(3)",
+            "main #main-content-starts section.column-control.flex-layout.has-padding-top--none"
+          ],
+          "style": null,
+          "blocks": [
+            "columns-social"
+          ],
+          "defaultContent": [
+            "main .text.section h2"
+          ]
+        }
+      ]
+    }
+  ]
+}

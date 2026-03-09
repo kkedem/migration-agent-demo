@@ -1,0 +1,38 @@
+{
+  "variantName": "cards-topic",
+  "baseBlock": "cards",
+  "version": "1.0.0",
+  "created": "2026-03-09T13:18:00.000Z",
+  "sourceContext": {
+    "originUrl": "https://www.pearson.com/en-gb/schools/secondary/parents-learners.html",
+    "originPage": "Secondary parents and learners landing page",
+    "blockPosition": "middle"
+  },
+  "visualCharacteristics": {
+    "colorScheme": "light",
+    "density": "standard",
+    "purpose": "topic-cards",
+    "imagePattern": "large"
+  },
+  "contentPattern": {
+    "structure": "image + heading + paragraph + CTA link",
+    "buttonCount": 1,
+    "imageCount": 4
+  },
+  "reuseGuidance": {
+    "suitableFor": [
+      "topic information cards with images",
+      "feature cards with descriptions and CTAs",
+      "resource cards with images and links"
+    ],
+    "notSuitableFor": [
+      "simple navigation cards without descriptions",
+      "cards without images"
+    ]
+  },
+  "usage": {
+    "pagesUsing": ["/en-gb/schools/secondary/parents-learners"],
+    "reuseCount": 1,
+    "lastUsed": "2026-03-09T13:18:00.000Z"
+  }
+}
