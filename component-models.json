@@ -1,0 +1,260 @@
+{
+  "models": [
+    {
+      "id": "section",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "style",
+          "value": "",
+          "label": "Style"
+        }
+      ]
+    },
+    {
+      "id": "text",
+      "fields": [
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "image",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
+        }
+      ]
+    },
+    {
+      "id": "button",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "link",
+          "label": "Link",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "linkText",
+          "label": "Text",
+          "value": ""
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "linkTitle",
+          "label": "Title",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "linkType",
+          "value": "",
+          "label": "Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "default",
+              "value": ""
+            },
+            {
+              "name": "primary",
+              "value": "primary"
+            },
+            {
+              "name": "secondary",
+              "value": "secondary"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "title",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "jcr:title",
+          "label": "Text",
+          "value": ""
+        },
+        {
+          "component": "select",
+          "name": "type",
+          "value": "h2",
+          "label": "Type",
+          "valueType": "string",
+          "options": [
+            {
+              "name": "h1",
+              "value": "h1"
+            },
+            {
+              "name": "h2",
+              "value": "h2"
+            },
+            {
+              "name": "h3",
+              "value": "h3"
+            },
+            {
+              "name": "h4",
+              "value": "h4"
+            },
+            {
+              "name": "h5",
+              "value": "h5"
+            },
+            {
+              "name": "h6",
+              "value": "h6"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "card-linked",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "card-topic",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Image",
+          "multi": false
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Text",
+          "valueType": "string"
+        }
+      ]
+    },
+    {
+      "id": "columns-info",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "2",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "1",
+          "label": "Rows"
+        }
+      ]
+    },
+    {
+      "id": "columns-promo",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "2",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "1",
+          "label": "Rows"
+        }
+      ]
+    },
+    {
+      "id": "columns-social",
+      "fields": [
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "columns",
+          "value": "2",
+          "label": "Columns"
+        },
+        {
+          "component": "text",
+          "valueType": "number",
+          "name": "rows",
+          "value": "1",
+          "label": "Rows"
+        }
+      ]
+    },
+    {
+      "id": "hero-landing",
+      "fields": [
+        {
+          "component": "reference",
+          "valueType": "string",
+          "name": "image",
+          "label": "Background Image",
+          "multi": false
+        },
+        {
+          "component": "text",
+          "valueType": "string",
+          "name": "imageAlt",
+          "label": "Alt",
+          "value": ""
+        },
+        {
+          "component": "richtext",
+          "name": "text",
+          "value": "",
+          "label": "Content",
+          "valueType": "string"
+        }
+      ]
+    }
+  ]
+}
