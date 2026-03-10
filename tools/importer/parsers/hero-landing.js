@@ -45,14 +45,20 @@ export default function parse(element, { document }) {
   // Build cells array matching hero block library structure
   const cells = [];
 
-  // Row 1: Background image (optional)
+  // Row 1: Background image (optional) with field hint
   if (promoImage) {
     const img = promoImage.tagName === 'IMG' ? promoImage : promoImage.querySelector('img');
-    if (img) cells.push([img.closest('picture') || img]);
+    if (img) {
+      const imageHint = document.createComment(' field:image ');
+      const imageContent = [imageHint, img.closest('picture') || img];
+      cells.push(imageContent);
+    }
   }
 
-  // Row 2: Content (heading, description, CTAs)
+  // Row 2: Content (heading, description, CTAs) with field hint
   if (contentCell.length > 0) {
+    const textHint = document.createComment(' field:text ');
+    contentCell.unshift(textHint);
     cells.push(contentCell);
   }
 

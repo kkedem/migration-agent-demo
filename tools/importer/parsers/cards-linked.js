@@ -34,11 +34,16 @@ export default function parse(element, { document }) {
     // Extract the link wrapping the card content
     const link = card.querySelector('.content-tile__figure > a[href]');
 
-    // Build image cell
-    const imageCell = imageEl ? (imageEl.closest('picture') || imageEl) : '';
+    // Build image cell with field hint
+    const imageContent = [];
+    if (imageEl) {
+      imageContent.push(document.createComment(' field:image '));
+      imageContent.push(imageEl.closest('picture') || imageEl);
+    }
 
-    // Build text cell: heading + link
+    // Build text cell with field hint: heading + link
     const textCell = [];
+    textCell.push(document.createComment(' field:text '));
     if (title) textCell.push(title);
     if (link && link.href) {
       const a = document.createElement('a');
@@ -47,8 +52,8 @@ export default function parse(element, { document }) {
       textCell.push(a);
     }
 
-    if (imageCell || textCell.length > 0) {
-      cells.push([imageCell, textCell]);
+    if (imageContent.length > 0 || textCell.length > 1) {
+      cells.push([imageContent, textCell]);
     }
   });
 

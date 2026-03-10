@@ -123,6 +123,14 @@
           ]
         }
       ]
+    },
+    {
+      "name": "further-education-page",
+      "urls": [
+        "https://www.pearson.com/en-gb/further-education.html"
+      ],
+      "description": "Further education landing page for Pearson UK with course and qualification information",
+      "blocks": []
     }
   ]
 }

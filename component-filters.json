@@ -1,0 +1,59 @@
+{
+  "filters": [
+    {
+      "id": "section",
+      "components": [
+        "cards-linked",
+        "cards-topic",
+        "columns-info",
+        "columns-promo",
+        "columns-social",
+        "hero-landing",
+        "text",
+        "image",
+        "button",
+        "title",
+        "separator"
+      ]
+    },
+    {
+      "id": "column",
+      "components": [
+        "text",
+        "image",
+        "button",
+        "title"
+      ]
+    },
+    {
+      "id": "cards-linked",
+      "components": [
+        "card-linked"
+      ]
+    },
+    {
+      "id": "cards-topic",
+      "components": [
+        "card-topic"
+      ]
+    },
+    {
+      "id": "columns-info",
+      "components": [
+        "column"
+      ]
+    },
+    {
+      "id": "columns-promo",
+      "components": [
+        "column"
+      ]
+    },
+    {
+      "id": "columns-social",
+      "components": [
+        "column"
+      ]
+    }
+  ]
+}
