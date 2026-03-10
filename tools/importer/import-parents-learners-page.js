@@ -24,13 +24,13 @@ const PAGE_TEMPLATE = {
     {
       name: 'hero-landing',
       instances: [
-        'main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type',
+        'main section.column-control.has-padding-bottom--45:first-of-type',
       ],
     },
     {
       name: 'cards-linked',
       instances: [
-        'main section.column-control.bgcolor--ui-01 .content-tile.content-tile-panel-item',
+        'main section.column-control.bgcolor--ui-01:nth-of-type(2)',
       ],
     },
     {
@@ -42,7 +42,7 @@ const PAGE_TEMPLATE = {
     {
       name: 'cards-topic',
       instances: [
-        'main section.column-control.flex-layout--pin-cta .content-tile.content-tile-panel-item',
+        'main section.column-control.flex-layout--pin-cta',
       ],
     },
     {
@@ -54,7 +54,7 @@ const PAGE_TEMPLATE = {
     {
       name: 'columns-social',
       instances: [
-        'main .content-tile.content-tile-panel-item-main.text-primary-link',
+        'main section.column-control.flex-layout.has-padding-top--none',
       ],
     },
   ],
@@ -62,7 +62,7 @@ const PAGE_TEMPLATE = {
     {
       id: 'section-1',
       name: 'Hero',
-      selector: 'main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type',
+      selector: 'main section.column-control.has-padding-bottom--45:first-of-type',
       style: null,
       blocks: ['hero-landing'],
       defaultContent: [],
@@ -70,7 +70,7 @@ const PAGE_TEMPLATE = {
     {
       id: 'section-2',
       name: 'Qualification Cards',
-      selector: 'main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(1)',
+      selector: 'main section.column-control.bgcolor--ui-01:nth-of-type(2)',
       style: 'grey',
       blocks: ['cards-linked'],
       defaultContent: [],
@@ -78,7 +78,7 @@ const PAGE_TEMPLATE = {
     {
       id: 'section-3',
       name: 'Information and Revise Promo',
-      selector: 'main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(2)',
+      selector: 'main section.column-control.has-padding-bottom--45:nth-of-type(3)',
       style: null,
       blocks: ['columns-promo'],
       defaultContent: ['.content-tile.promocard--light-theme'],
@@ -86,7 +86,7 @@ const PAGE_TEMPLATE = {
     {
       id: 'section-4',
       name: 'Careers Hub',
-      selector: 'main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(2)',
+      selector: 'main section.column-control.bgcolor--ui-01:nth-of-type(4)',
       style: 'grey',
       blocks: [],
       defaultContent: ['.content-tile.text-primary-link'],
@@ -94,7 +94,7 @@ const PAGE_TEMPLATE = {
     {
       id: 'section-5',
       name: 'Topic Cards',
-      selector: 'main #main-content-starts section.column-control.flex-layout--pin-cta',
+      selector: 'main section.column-control.flex-layout--pin-cta',
       style: null,
       blocks: ['cards-topic'],
       defaultContent: [],
@@ -102,7 +102,7 @@ const PAGE_TEMPLATE = {
     {
       id: 'section-6',
       name: 'Wellbeing',
-      selector: 'main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(3)',
+      selector: 'main section.column-control.bgcolor--ui-01:nth-of-type(6)',
       style: 'grey',
       blocks: ['columns-info'],
       defaultContent: [],
@@ -111,8 +111,8 @@ const PAGE_TEMPLATE = {
       id: 'section-7',
       name: 'Get in Touch',
       selector: [
-        'main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(3)',
-        'main #main-content-starts section.column-control.flex-layout.has-padding-top--none',
+        'main section.column-control.has-padding-bottom--45:nth-of-type(7)',
+        'main section.column-control.flex-layout.has-padding-top--none',
       ],
       style: null,
       blocks: ['columns-social'],
@@ -202,10 +202,16 @@ export default {
     // 1. Execute beforeTransform transformers (initial cleanup: cookie banners, iframes)
     executeTransformers('beforeTransform', main, { document, url, html, params });
 
-    // 2. Find blocks on page using embedded template selectors
+    // 2. Insert section breaks BEFORE block parsing (parsers replace section elements,
+    //    so section selectors must run while original DOM structure is intact)
+    pearsonSectionsTransformer.call(null, 'afterTransform', main, {
+      document, url, html, params, template: PAGE_TEMPLATE,
+    });
+
+    // 3. Find blocks on page using embedded template selectors
     const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
 
-    // 3. Parse each block using registered parsers
+    // 4. Parse each block using registered parsers
     pageBlocks.forEach((block) => {
       const parser = parsers[block.name];
       if (parser) {
@@ -219,17 +225,32 @@ export default {
       }
     });
 
-    // 4. Execute afterTransform transformers (header/footer removal + section breaks/metadata)
-    executeTransformers('afterTransform', main, { document, url, html, params });
+    // 5. Execute afterTransform for cleanup only (sections already handled above)
+    pearsonCleanupTransformer.call(null, 'afterTransform', main, {
+      document, url, html, params, template: PAGE_TEMPLATE,
+    });
 
-    // 5. Apply WebImporter built-in rules
+    // 6. Flatten nested DOM: move all content from nested containers to body level.
+    //    The Pearson page has content nested in body > main > div > div.aem-Grid > ...
+    //    EDS needs <hr> section breaks as direct children of the output element.
+    const contentContainer = main.querySelector('.aem-Grid') || main.querySelector('main > div') || main;
+    if (contentContainer !== main) {
+      while (contentContainer.firstChild) {
+        main.appendChild(contentContainer.firstChild);
+      }
+      // Remove the now-empty wrapper structure
+      const mainEl = main.querySelector('main');
+      if (mainEl) mainEl.remove();
+    }
+
+    // 7. Apply WebImporter built-in rules
     const hr = document.createElement('hr');
     main.appendChild(hr);
     WebImporter.rules.createMetadata(main, document);
     WebImporter.rules.transformBackgroundImages(main, document);
     WebImporter.rules.adjustImageUrls(main, url, params.originalURL);
 
-    // 6. Generate sanitized path (full localized path without extension)
+    // 8. Generate sanitized path (full localized path without extension)
     const path = WebImporter.FileUtils.sanitizePath(
       new URL(params.originalURL).pathname.replace(/\/$/, '').replace(/\.html$/, ''),
     );

@@ -10,13 +10,13 @@
         {
           "name": "hero-landing",
           "instances": [
-            "main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type"
+            "main section.column-control.has-padding-bottom--45:first-of-type"
           ]
         },
         {
           "name": "cards-linked",
           "instances": [
-            "main section.column-control.bgcolor--ui-01 .content-tile.content-tile-panel-item"
+            "main section.column-control.bgcolor--ui-01:nth-of-type(2)"
           ]
         },
         {
@@ -28,7 +28,7 @@
         {
           "name": "cards-topic",
           "instances": [
-            "main section.column-control.flex-layout--pin-cta .content-tile.content-tile-panel-item"
+            "main section.column-control.flex-layout--pin-cta"
           ]
         },
         {
@@ -40,7 +40,7 @@
         {
           "name": "columns-social",
           "instances": [
-            "main .content-tile.content-tile-panel-item-main.text-primary-link"
+            "main section.column-control.flex-layout.has-padding-top--none"
           ]
         }
       ],
@@ -48,7 +48,7 @@
         {
           "id": "section-1",
           "name": "Hero",
-          "selector": "main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type",
+          "selector": "main section.column-control.has-padding-bottom--45:first-of-type",
           "style": null,
           "blocks": [
             "hero-landing"
@@ -58,7 +58,7 @@
         {
           "id": "section-2",
           "name": "Qualification Cards",
-          "selector": "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(1)",
+          "selector": "main section.column-control.bgcolor--ui-01:nth-of-type(2)",
           "style": "grey",
           "blocks": [
             "cards-linked"
@@ -68,7 +68,7 @@
         {
           "id": "section-3",
           "name": "Information and Revise Promo",
-          "selector": "main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(2)",
+          "selector": "main section.column-control.has-padding-bottom--45:nth-of-type(3)",
           "style": null,
           "blocks": [
             "columns-promo"
@@ -80,7 +80,7 @@
         {
           "id": "section-4",
           "name": "Careers Hub",
-          "selector": "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(2)",
+          "selector": "main section.column-control.bgcolor--ui-01:nth-of-type(4)",
           "style": "grey",
           "blocks": [],
           "defaultContent": [
@@ -90,7 +90,7 @@
         {
           "id": "section-5",
           "name": "Topic Cards",
-          "selector": "main #main-content-starts section.column-control.flex-layout--pin-cta",
+          "selector": "main section.column-control.flex-layout--pin-cta",
           "style": null,
           "blocks": [
             "cards-topic"
@@ -100,7 +100,7 @@
         {
           "id": "section-6",
           "name": "Wellbeing",
-          "selector": "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(3)",
+          "selector": "main section.column-control.bgcolor--ui-01:nth-of-type(6)",
           "style": "grey",
           "blocks": [
             "columns-info"
@@ -111,8 +111,8 @@
           "id": "section-7",
           "name": "Get in Touch",
           "selector": [
-            "main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(3)",
-            "main #main-content-starts section.column-control.flex-layout.has-padding-top--none"
+            "main section.column-control.has-padding-bottom--45:nth-of-type(7)",
+            "main section.column-control.flex-layout.has-padding-top--none"
           ],
           "style": null,
           "blocks": [

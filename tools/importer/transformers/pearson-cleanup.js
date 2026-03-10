@@ -34,6 +34,12 @@ export default function transform(hookName, element, payload) {
       'iframe',
       'link',
       'noscript',
+      // Remove tracking pixels (Twitter, Bing, Google)
+      'img[src*="t.co"]',
+      'img[src*="analytics.twitter.com"]',
+      'img[src*="bat.bing.com"]',
+      'img[src*="google-analytics.com"]',
+      'img[src*="googleadservices.com"]',
     ]);
   }
 }

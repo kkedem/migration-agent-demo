@@ -1,25 +1,8 @@
 var CustomImportScript = (() => {
   var __defProp = Object.defineProperty;
-  var __defProps = Object.defineProperties;
   var __getOwnPropDesc = Object.getOwnPropertyDescriptor;
-  var __getOwnPropDescs = Object.getOwnPropertyDescriptors;
   var __getOwnPropNames = Object.getOwnPropertyNames;
-  var __getOwnPropSymbols = Object.getOwnPropertySymbols;
   var __hasOwnProp = Object.prototype.hasOwnProperty;
-  var __propIsEnum = Object.prototype.propertyIsEnumerable;
-  var __defNormalProp = (obj, key, value) => key in obj ? __defProp(obj, key, { enumerable: true, configurable: true, writable: true, value }) : obj[key] = value;
-  var __spreadValues = (a, b) => {
-    for (var prop in b || (b = {}))
-      if (__hasOwnProp.call(b, prop))
-        __defNormalProp(a, prop, b[prop]);
-    if (__getOwnPropSymbols)
-      for (var prop of __getOwnPropSymbols(b)) {
-        if (__propIsEnum.call(b, prop))
-          __defNormalProp(a, prop, b[prop]);
-      }
-    return a;
-  };
-  var __spreadProps = (a, b) => __defProps(a, __getOwnPropDescs(b));
   var __export = (target, all) => {
     for (var name in all)
       __defProp(target, name, { get: all[name], enumerable: true });
@@ -59,9 +42,15 @@ var CustomImportScript = (() => {
     const cells = [];
     if (promoImage) {
       const img = promoImage.tagName === "IMG" ? promoImage : promoImage.querySelector("img");
-      if (img) cells.push([img.closest("picture") || img]);
+      if (img) {
+        const imageHint = document.createComment(" field:image ");
+        const imageContent = [imageHint, img.closest("picture") || img];
+        cells.push(imageContent);
+      }
     }
     if (contentCell.length > 0) {
+      const textHint = document.createComment(" field:text ");
+      contentCell.unshift(textHint);
       cells.push(contentCell);
     }
     const block = WebImporter.Blocks.createBlock(document, { name: "hero-landing", cells });
@@ -78,8 +67,13 @@ var CustomImportScript = (() => {
       const imageEl = picture || img;
       const title = card.querySelector(".content-tile__title, h2");
       const link = card.querySelector(".content-tile__figure > a[href]");
-      const imageCell = imageEl ? imageEl.closest("picture") || imageEl : "";
+      const imageContent = [];
+      if (imageEl) {
+        imageContent.push(document.createComment(" field:image "));
+        imageContent.push(imageEl.closest("picture") || imageEl);
+      }
       const textCell = [];
+      textCell.push(document.createComment(" field:text "));
       if (title) textCell.push(title);
       if (link && link.href) {
         const a = document.createElement("a");
@@ -87,8 +81,8 @@ var CustomImportScript = (() => {
         a.textContent = title ? title.textContent : link.textContent;
         textCell.push(a);
       }
-      if (imageCell || textCell.length > 0) {
-        cells.push([imageCell, textCell]);
+      if (imageContent.length > 0 || textCell.length > 1) {
+        cells.push([imageContent, textCell]);
       }
     });
     const block = WebImporter.Blocks.createBlock(document, { name: "cards-linked", cells });
@@ -200,7 +194,13 @@ var CustomImportScript = (() => {
         "#accessibility__announcement",
         "iframe",
         "link",
-        "noscript"
+        "noscript",
+        // Remove tracking pixels (Twitter, Bing, Google)
+        'img[src*="t.co"]',
+        'img[src*="analytics.twitter.com"]',
+        'img[src*="bat.bing.com"]',
+        'img[src*="google-analytics.com"]',
+        'img[src*="googleadservices.com"]'
       ]);
     }
   }
@@ -245,13 +245,13 @@ var CustomImportScript = (() => {
       {
         name: "hero-landing",
         instances: [
-          "main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type"
+          "main section.column-control.has-padding-bottom--45:first-of-type"
         ]
       },
       {
         name: "cards-linked",
         instances: [
-          "main section.column-control.bgcolor--ui-01 .content-tile.content-tile-panel-item"
+          "main section.column-control.bgcolor--ui-01:nth-of-type(2)"
         ]
       },
       {
@@ -263,7 +263,7 @@ var CustomImportScript = (() => {
       {
         name: "cards-topic",
         instances: [
-          "main section.column-control.flex-layout--pin-cta .content-tile.content-tile-panel-item"
+          "main section.column-control.flex-layout--pin-cta"
         ]
       },
       {
@@ -275,7 +275,7 @@ var CustomImportScript = (() => {
       {
         name: "columns-social",
         instances: [
-          "main .content-tile.content-tile-panel-item-main.text-primary-link"
+          "main section.column-control.flex-layout.has-padding-top--none"
         ]
       }
     ],
@@ -283,7 +283,7 @@ var CustomImportScript = (() => {
       {
         id: "section-1",
         name: "Hero",
-        selector: "main #main-content-starts section.column-control.has-padding-bottom--45:first-of-type",
+        selector: "main section.column-control.has-padding-bottom--45:first-of-type",
         style: null,
         blocks: ["hero-landing"],
         defaultContent: []
@@ -291,7 +291,7 @@ var CustomImportScript = (() => {
       {
         id: "section-2",
         name: "Qualification Cards",
-        selector: "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(1)",
+        selector: "main section.column-control.bgcolor--ui-01:nth-of-type(2)",
         style: "grey",
         blocks: ["cards-linked"],
         defaultContent: []
@@ -299,7 +299,7 @@ var CustomImportScript = (() => {
       {
         id: "section-3",
         name: "Information and Revise Promo",
-        selector: "main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(2)",
+        selector: "main section.column-control.has-padding-bottom--45:nth-of-type(3)",
         style: null,
         blocks: ["columns-promo"],
         defaultContent: [".content-tile.promocard--light-theme"]
@@ -307,7 +307,7 @@ var CustomImportScript = (() => {
       {
         id: "section-4",
         name: "Careers Hub",
-        selector: "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(2)",
+        selector: "main section.column-control.bgcolor--ui-01:nth-of-type(4)",
         style: "grey",
         blocks: [],
         defaultContent: [".content-tile.text-primary-link"]
@@ -315,7 +315,7 @@ var CustomImportScript = (() => {
       {
         id: "section-5",
         name: "Topic Cards",
-        selector: "main #main-content-starts section.column-control.flex-layout--pin-cta",
+        selector: "main section.column-control.flex-layout--pin-cta",
         style: null,
         blocks: ["cards-topic"],
         defaultContent: []
@@ -323,7 +323,7 @@ var CustomImportScript = (() => {
       {
         id: "section-6",
         name: "Wellbeing",
-        selector: "main #main-content-starts section.column-control.bgcolor--ui-01:nth-of-type(3)",
+        selector: "main section.column-control.bgcolor--ui-01:nth-of-type(6)",
         style: "grey",
         blocks: ["columns-info"],
         defaultContent: []
@@ -332,8 +332,8 @@ var CustomImportScript = (() => {
         id: "section-7",
         name: "Get in Touch",
         selector: [
-          "main #main-content-starts section.column-control.has-padding-bottom--45:nth-of-type(3)",
-          "main #main-content-starts section.column-control.flex-layout.has-padding-top--none"
+          "main section.column-control.has-padding-bottom--45:nth-of-type(7)",
+          "main section.column-control.flex-layout.has-padding-top--none"
         ],
         style: null,
         blocks: ["columns-social"],
@@ -354,9 +354,10 @@ var CustomImportScript = (() => {
     ...PAGE_TEMPLATE.sections && PAGE_TEMPLATE.sections.length > 1 ? [transform2] : []
   ];
   function executeTransformers(hookName, element, payload) {
-    const enhancedPayload = __spreadProps(__spreadValues({}, payload), {
+    const enhancedPayload = {
+      ...payload,
       template: PAGE_TEMPLATE
-    });
+    };
     transformers.forEach((transformerFn) => {
       try {
         transformerFn.call(null, hookName, element, enhancedPayload);
@@ -393,6 +394,13 @@ var CustomImportScript = (() => {
     transform: ({ document, url, html, params }) => {
       const main = document.body;
       executeTransformers("beforeTransform", main, { document, url, html, params });
+      transform2.call(null, "afterTransform", main, {
+        document,
+        url,
+        html,
+        params,
+        template: PAGE_TEMPLATE
+      });
       const pageBlocks = findBlocksOnPage(document, PAGE_TEMPLATE);
       pageBlocks.forEach((block) => {
         const parser = parsers[block.name];
@@ -406,7 +414,21 @@ var CustomImportScript = (() => {
           console.warn(`No parser found for block: ${block.name}`);
         }
       });
-      executeTransformers("afterTransform", main, { document, url, html, params });
+      transform.call(null, "afterTransform", main, {
+        document,
+        url,
+        html,
+        params,
+        template: PAGE_TEMPLATE
+      });
+      const contentContainer = main.querySelector(".aem-Grid") || main.querySelector("main > div") || main;
+      if (contentContainer !== main) {
+        while (contentContainer.firstChild) {
+          main.appendChild(contentContainer.firstChild);
+        }
+        const mainEl = main.querySelector("main");
+        if (mainEl) mainEl.remove();
+      }
       const hr = document.createElement("hr");
       main.appendChild(hr);
       WebImporter.rules.createMetadata(main, document);
